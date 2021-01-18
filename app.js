@@ -4,10 +4,8 @@ const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 const buttonReset = document.getElementsByClassName('btn__reset')[0];
 const missed = 0;
-const letterButton = document.getElementById('keyrow');
+const button = document.getElementById('keyrow');
 
-
-//Phrases to guess while in gameplay
 const phrases = [
     'hello world',
     'knowledge is power',
@@ -18,6 +16,7 @@ const phrases = [
 
 const characters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
+//Hide the start screen overlay
 buttonReset.addEventListener('click', () => {
         buttonReset.parentNode.style.display = "none";
     });
@@ -54,18 +53,21 @@ addPhraseToDisplay(phraseArray);
 function checkLetter(button) {
     const li = document.querySelectorAll('.letter');
     let match = null;
-    for (let i = 0; i < li.length; i++);
+    for (let i = 0; i < li.length; i++) {
         if (li[i].textContent.toLowerCase() == button ) {
             li[i].classList.add('show');  
-            match += li[i].textContent;
+            match = li[i].textContent;
         }
+        return match;
     }
-       return match;
 }
 
-/*Event listener for 'press button' on the screen keyboard
-qwerty.addEventListener('click', e => {
-    //missing statements
+// Event listener for letter guess
+qwerty.addEventListener('click', (e) => {
+    if ( e.target.tagName === 'BUTTON' && !e.target.disabled) {
+        e.target.classList.add('chosen');
+        let button = e.target.textContent;
+        const letterFound = checkLetter(button);
+    } 
+});
 
-
-}); */
