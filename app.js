@@ -54,19 +54,37 @@ function checkLetter(button) {
     const li = document.querySelectorAll('.letter');
     let match = null;
     for (let i = 0; i < li.length; i++) {
-        if (li[i].textContent.toLowerCase() == button ) {
+        if (li[i].textContent.toLowerCase() == button.textContent ) {
             li[i].classList.add('show');  
             match = li[i].textContent;
         }
-        return match;
     }
+        return match;
 }
 
 // Event listener for letter guess
 qwerty.addEventListener('click', (e) => {
-    if ( e.target.tagName === 'BUTTON' && !e.target.disabled) {
-        e.target.classList.add('chosen');
-    } 
+        if ( e.target.tagName === 'BUTTON' && !e.target.disabled) {
+            e.target.classList.add('chosen');
+            const letterFound = checkLetter(e.target);
+        if ( letterFound === null ) {
+            const hearts = document.querySelectorAll('.tries img');
+            hearts[missed].src = "images/lostHeart.png";
+            missed ++;    
+        } 
+    }
 });
 
-const letterFound = checkLetter(button);
+// check if the game has been won or lost
+const checkWin = () => {
+    const liLetter = document.querySelectorAll('.letter');
+    const liShow = document.querySelectorAll('.show');
+    if (liLetter.length === liShow.length ) {
+        const winOverlay = document.getElementById('overlay');
+        winOverlay.classList.add('win');
+        const headline = document.querySelectorAll('header');
+        headline.textContent = 'You Won, Congratulations!';
+        winOverlay.style.display = 'flex';
+    } 
+
+}
