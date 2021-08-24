@@ -122,6 +122,15 @@ button {
   font-size: var(--font-size-medium);
 }
 
+.btn__cleargame {
+  display: none;
+  padding: 8px;
+  margin: 50px auto;
+  background: #ffffff;
+  border-radius: 5px;
+  font-size: var(--font-size-medium);
+}
+
 /* Overlay */
 
 #overlay {

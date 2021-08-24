@@ -3,6 +3,7 @@
 const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 let buttonReset = document.getElementsByClassName('btn__reset')[0];
+let buttonClearGame = document.getElementsByClassName('btn__cleargame')[0];
 let missed = 0;
 let button = document.getElementById('keyrow');
 let hearts = document.querySelectorAll('.tries img');
@@ -87,9 +88,18 @@ const checkWin = () => {
         overlay.classList.add('win');
         overlay.style.display = 'flex';
         headline.textContent = 'You Won! Congratulations!';
+        buttonReset.style.display = 'none';
+        buttonClearGame.style.display = 'flex';
     } else if (missed >= 5) {
         overlay.classList.add('lose');
         overlay.style.display = 'flex';
         headline.textContent = 'Uh oh. You Lost!';
-    }
+        buttonReset.style.display = 'none';
+        buttonClearGame.style.display = 'flex';
+    } 
 }
+
+// Clear the game and restart
+buttonClearGame.addEventListener('click', () => {
+    window.location.reload();
+});
